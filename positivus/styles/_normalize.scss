@@ -1,0 +1,114 @@
+/* block model normalization */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* remove left padding from list elements that have a class attribute */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/* remove margins from body and two other elements that have a class attribute */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/* remove vertical margins from specified elements that have a class attribute */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+  margin-block: 0;
+}
+/* remove default list markers from ordered lists that have a class attribute */
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+/* remove default markers from unordered lists that have a class attribute */
+:where(ul[class]) {
+  list-style: none;
+}
+
+/* remove default border and padding from fieldsets that have a class attribute */
+:where(fieldset[class]) {
+  border: none;
+  margin-left: 0;
+  padding: 0;
+}
+
+/* remove default paragraph margin and set a variable for bottom margin */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/* set bottom margin for paragraphs that have a class attribute, except the last one */
+p:where(:not([class]):not(last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/* simplify working with images */
+img {
+  display: block;
+  max-width: 100%;
+  /* height: auto; */
+}
+
+/* fix color change delay bug when interacting with sVG elements */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/* set currentColor as default for fill and stroke properties in SVG elements */
+svg *[fill] {
+  fill: currentColor;
+}
+
+svg *[stroke] {
+  stroke: currentColor;
+}
+
+/* remove default button border and decoration */
+button {
+  border: none;
+  text-decoration: none;
+}
+
+/* inherit font properties for form fields */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+/* pointer cursor for interactive elements */
+button,
+label {
+  cursor: pointer;
+}
+
+html {
+  /* useful in most situations (e.g., when needing to "stick" footer to the bottom) */
+  height: 100%;
+  /* smooth scrolling */
+  scroll-behavior: smooth;
+}
+
+body {
+  /* useful in most situations (e.g., when needing to "stick" footer to the bottom) */
+  min-height: 100%;
+  /* standardized line height */
+  line-height: 1.5;
+}
+
+/* remove all animations and transitions for people who prefer not to use them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
