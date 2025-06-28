@@ -30,7 +30,7 @@ body,
   list-style: none;
 }
 
-/* remove default border and padding from fieldsets that have a class attribute */
+/* remove default border, margin and padding from fieldsets that have a class attribute */
 :where(fieldset[class]) {
   border: none;
   margin-left: 0;
